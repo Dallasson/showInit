@@ -8,6 +8,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.google.firebase.database.*
@@ -18,6 +19,7 @@ import org.osmdroid.util.GeoPoint
 import org.osmdroid.views.MapView
 import org.osmdroid.views.overlay.Marker
 import android.util.Log
+import android.graphics.drawable.Drawable
 
 class MainActivity : AppCompatActivity() {
 
@@ -31,7 +33,6 @@ class MainActivity : AppCompatActivity() {
     private lateinit var appCard: View
 
     private var selectedDeviceId: String? = null
-    private var selectedAppList: ArrayList<AppInfo>? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -53,7 +54,6 @@ class MainActivity : AppCompatActivity() {
 
         dbRef = FirebaseDatabase.getInstance().reference.child("Info")
 
-        // Bind views
         deviceNameView = findViewById(R.id.deviceNameValue)
         deviceIdView = findViewById(R.id.deviceIdValue)
         batteryView = findViewById(R.id.batteryValue)
@@ -80,6 +80,9 @@ class MainActivity : AppCompatActivity() {
             override fun onDataChange(snapshot: DataSnapshot) {
                 map.overlays.clear()
 
+                val markerIcon: Drawable? =
+                    ContextCompat.getDrawable(this@MainActivity, R.drawable.ic_device_marker)
+
                 for (child in snapshot.children) {
                     val device = child.getValue(DeviceInfo::class.java) ?: continue
                     val point = GeoPoint(device.latitude, device.longitude)
@@ -87,29 +90,15 @@ class MainActivity : AppCompatActivity() {
                     val marker = Marker(map).apply {
                         position = point
                         title = device.deviceName
+                        icon = markerIcon
                         setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM)
                         setOnMarkerClickListener { marker, _ ->
                             val clickedLat = marker.position.latitude
                             val clickedLon = marker.position.longitude
-
-                            // Check if this marker matches this device's location
                             if (clickedLat == device.latitude && clickedLon == device.longitude) {
                                 Log.d("MainActivity", "Marker clicked for ${device.deviceName} at ($clickedLat, $clickedLon)")
-
                                 updateCardUI(device)
-
-                                val apps = ArrayList<AppInfo>()
-                                child.child("apps").children.forEach { appSnap ->
-                                    val name = appSnap.child("name").getValue(String::class.java) ?: return@forEach
-                                    val pkg = appSnap.child("package").getValue(String::class.java) ?: return@forEach
-                                    val icon = appSnap.child("icon").getValue(String::class.java) ?: ""
-                                    apps.add(AppInfo(name, pkg, icon))
-                                }
-
-                                Log.d("MainActivity", "Loaded ${apps.size} apps for selected device.")
-                                selectedAppList = apps
                             }
-
                             true
                         }
                     }
@@ -118,11 +107,8 @@ class MainActivity : AppCompatActivity() {
                 }
 
                 map.controller.setZoom(8.0)
-                if (snapshot.children.iterator().hasNext()) {
-                    val firstDevice = snapshot.children.iterator().next().getValue(DeviceInfo::class.java)
-                    firstDevice?.let {
-                        map.controller.setCenter(GeoPoint(it.latitude, it.longitude))
-                    }
+                snapshot.children.iterator().takeIf { it.hasNext() }?.next()?.getValue(DeviceInfo::class.java)?.let {
+                    map.controller.setCenter(GeoPoint(it.latitude, it.longitude))
                 }
 
                 map.invalidate()
@@ -151,6 +137,5 @@ class MainActivity : AppCompatActivity() {
         networkTypeView.text = ""
         appCountView.text = ""
         selectedDeviceId = null
-        selectedAppList = null
     }
 }
