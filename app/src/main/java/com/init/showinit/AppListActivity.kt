@@ -40,7 +40,7 @@ class AppListActivity : AppCompatActivity() {
     }
 
     private fun fetchAppList() {
-        dbRef.addListenerForSingleValueEvent(object : ValueEventListener {
+        dbRef.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 val appList = ArrayList<AppInfo>()
                 for (appSnap in snapshot.children) {
