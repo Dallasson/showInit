@@ -59,7 +59,7 @@ class MainActivity : AppCompatActivity() {
         batteryView = findViewById(R.id.batteryValue)
         networkTypeView = findViewById(R.id.networkTypeValue)
         appCountView = findViewById(R.id.appCountValue)
-        appCard = findViewById(R.id.appCountCard)
+        appCard = findViewById(R.id.cardSection)
 
         appCard.setOnClickListener {
             selectedDeviceId?.let { id ->

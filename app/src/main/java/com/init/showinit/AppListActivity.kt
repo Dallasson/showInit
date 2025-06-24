@@ -47,7 +47,9 @@ class AppListActivity : AppCompatActivity() {
                     val name = appSnap.child("name").getValue(String::class.java) ?: continue
                     val pkg = appSnap.child("package").getValue(String::class.java) ?: continue
                     val icon = appSnap.child("icon").getValue(String::class.java) ?: ""
-                    appList.add(AppInfo(name, pkg, icon))
+                    val version = appSnap.child("version").getValue(String::class.java) ?: "N/A"
+
+                    appList.add(AppInfo(name, pkg, icon, version))
                 }
 
                 adapter = AppListAdapter(appList)
@@ -60,4 +62,5 @@ class AppListActivity : AppCompatActivity() {
             }
         })
     }
+
 }

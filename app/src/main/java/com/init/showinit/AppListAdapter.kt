@@ -13,6 +13,7 @@ class AppListAdapter(private val apps: List<AppInfo>) : RecyclerView.Adapter<App
         val iconView: ImageView = view.findViewById(R.id.appIcon)
         val nameView: TextView = view.findViewById(R.id.appName)
         val packageView: TextView = view.findViewById(R.id.appPackage)
+        val versionView: TextView = view.findViewById(R.id.appVersion) // ✅ added
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AppViewHolder {
@@ -24,6 +25,8 @@ class AppListAdapter(private val apps: List<AppInfo>) : RecyclerView.Adapter<App
 
     override fun onBindViewHolder(holder: AppViewHolder, position: Int) {
         val app = apps[position]
+
+        holder.versionView.text = "v${app.versionName.ifEmpty { "N/A" }}"
 
         // Decode Base64 to Bitmap
         if (app.iconBase64.isNotEmpty()) {
