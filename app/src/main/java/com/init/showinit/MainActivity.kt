@@ -35,15 +35,13 @@ class MainActivity : AppCompatActivity() {
     private lateinit var networkTypeView: TextView
     private lateinit var appCountView: TextView
     private lateinit var appCard: View
-
     private var selectedDeviceId: String? = null
-
     private val markerColors = listOf(
         Color.RED,
         Color.BLUE,
         Color.BLACK,
         Color.GREEN,
-        "#FFA500".toColorInt() // Orange
+        "#FFA500".toColorInt()
     )
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -138,7 +136,7 @@ class MainActivity : AppCompatActivity() {
     private fun updateCardUI(device: DeviceInfo) {
         deviceNameView.text = device.deviceName
         deviceIdView.text = device.deviceID
-        batteryView.text = "${device.battery}%"
+        "${device.battery}%".also { batteryView.text = it }
         networkTypeView.text = device.networkType
         appCountView.text = device.apps.size.toString()
         selectedDeviceId = device.deviceID
