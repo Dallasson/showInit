@@ -2,6 +2,7 @@ package com.init.showinit
 
 import android.content.Intent
 import android.content.pm.ActivityInfo
+import android.graphics.Color
 import android.os.Bundle
 import android.view.View
 import android.widget.TextView
@@ -20,6 +21,9 @@ import org.osmdroid.views.MapView
 import org.osmdroid.views.overlay.Marker
 import android.util.Log
 import android.graphics.drawable.Drawable
+import androidx.core.graphics.drawable.DrawableCompat
+import androidx.core.graphics.toColorInt
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -34,10 +38,17 @@ class MainActivity : AppCompatActivity() {
 
     private var selectedDeviceId: String? = null
 
+    private val markerColors = listOf(
+        Color.RED,
+        Color.BLUE,
+        Color.BLACK,
+        Color.GREEN,
+        "#FFA500".toColorInt() // Orange
+    )
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
-        enableEdgeToEdge()
         setContentView(R.layout.activity_main)
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
@@ -80,17 +91,20 @@ class MainActivity : AppCompatActivity() {
             override fun onDataChange(snapshot: DataSnapshot) {
                 map.overlays.clear()
 
-                val markerIcon: Drawable? =
-                    ContextCompat.getDrawable(this@MainActivity, R.drawable.ic_device_marker)
-
                 for (child in snapshot.children) {
                     val device = child.getValue(DeviceInfo::class.java) ?: continue
                     val point = GeoPoint(device.latitude, device.longitude)
 
+                    val randomColor = markerColors.random()
+                    val tintedIcon = ContextCompat.getDrawable(this@MainActivity, R.drawable.ic_device_marker)?.mutate()
+                    tintedIcon?.let {
+                        DrawableCompat.setTint(DrawableCompat.wrap(it), randomColor)
+                    }
+
                     val marker = Marker(map).apply {
                         position = point
                         title = device.deviceName
-                        icon = markerIcon
+                        icon = tintedIcon
                         setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM)
                         setOnMarkerClickListener { marker, _ ->
                             val clickedLat = marker.position.latitude
