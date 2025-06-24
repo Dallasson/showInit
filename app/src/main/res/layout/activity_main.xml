@@ -16,7 +16,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toTopOf="@id/cardSection"
-        app:layout_constraintHeight_percent="0.7" />
+        app:layout_constraintHeight_percent="0.8" />
 
     <!-- Card Section (bottom 30%) -->
     <LinearLayout
@@ -29,7 +29,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHeight_percent="0.3">
+        app:layout_constraintHeight_percent="0.2">
 
         <!-- CARD 1: Device Name -->
         <androidx.cardview.widget.CardView
@@ -49,10 +49,10 @@
                 android:padding="12dp">
 
                 <TextView
-                    android:text="Device Name"
+                    android:text="Name"
                     android:textColor="@color/textPrimary"
                     android:textStyle="bold"
-                    android:textSize="15sp"
+                    android:textSize="13sp"
                     android:gravity="center"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
@@ -60,7 +60,7 @@
                 <TextView
                     android:id="@+id/deviceNameValue"
                     android:textColor="@color/textSecondary"
-                    android:textSize="14sp"
+                    android:textSize="11sp"
                     android:gravity="center"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
@@ -88,7 +88,7 @@
                     android:text="Device ID"
                     android:textColor="@color/textPrimary"
                     android:textStyle="bold"
-                    android:textSize="15sp"
+                    android:textSize="13sp"
                     android:gravity="center"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
@@ -96,7 +96,7 @@
                 <TextView
                     android:id="@+id/deviceIdValue"
                     android:textColor="@color/textSecondary"
-                    android:textSize="14sp"
+                    android:textSize="11sp"
                     android:gravity="center"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
@@ -124,7 +124,7 @@
                     android:text="Battery"
                     android:textColor="@color/textPrimary"
                     android:textStyle="bold"
-                    android:textSize="15sp"
+                    android:textSize="13sp"
                     android:gravity="center"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
@@ -132,7 +132,7 @@
                 <TextView
                     android:id="@+id/batteryValue"
                     android:textColor="@color/textSecondary"
-                    android:textSize="14sp"
+                    android:textSize="11sp"
                     android:gravity="center"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
@@ -160,7 +160,7 @@
                     android:text="Network"
                     android:textColor="@color/textPrimary"
                     android:textStyle="bold"
-                    android:textSize="15sp"
+                    android:textSize="13sp"
                     android:gravity="center"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
@@ -168,7 +168,7 @@
                 <TextView
                     android:id="@+id/networkTypeValue"
                     android:textColor="@color/textSecondary"
-                    android:textSize="14sp"
+                    android:textSize="11sp"
                     android:gravity="center"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
@@ -196,7 +196,7 @@
                     android:text="Apps"
                     android:textColor="@color/textPrimary"
                     android:textStyle="bold"
-                    android:textSize="15sp"
+                    android:textSize="13sp"
                     android:gravity="center"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
@@ -204,7 +204,7 @@
                 <TextView
                     android:id="@+id/appCountValue"
                     android:textColor="@color/textSecondary"
-                    android:textSize="14sp"
+                    android:textSize="11sp"
                     android:gravity="center"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
@@ -229,10 +229,10 @@
                 android:padding="12dp">
 
                 <TextView
-                    android:text="Device Model"
+                    android:text="Model"
                     android:textColor="@color/textPrimary"
                     android:textStyle="bold"
-                    android:textSize="15sp"
+                    android:textSize="13sp"
                     android:gravity="center"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
@@ -240,7 +240,7 @@
                 <TextView
                     android:id="@+id/deviceModelValue"
                     android:textColor="@color/textSecondary"
-                    android:textSize="14sp"
+                    android:textSize="11sp"
                     android:gravity="center"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
@@ -268,7 +268,7 @@
                     android:text="Manufacturer"
                     android:textColor="@color/textPrimary"
                     android:textStyle="bold"
-                    android:textSize="15sp"
+                    android:textSize="13sp"
                     android:gravity="center"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
@@ -276,7 +276,7 @@
                 <TextView
                     android:id="@+id/manufacturerValue"
                     android:textColor="@color/textSecondary"
-                    android:textSize="14sp"
+                    android:textSize="11sp"
                     android:gravity="center"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
@@ -300,10 +300,10 @@
                 android:padding="12dp">
 
                 <TextView
-                    android:text="Android Version"
+                    android:text="Version"
                     android:textColor="@color/textPrimary"
                     android:textStyle="bold"
-                    android:textSize="15sp"
+                    android:textSize="13sp"
                     android:gravity="center"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
@@ -311,7 +311,7 @@
                 <TextView
                     android:id="@+id/androidVersionValue"
                     android:textColor="@color/textSecondary"
-                    android:textSize="14sp"
+                    android:textSize="11sp"
                     android:gravity="center"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
