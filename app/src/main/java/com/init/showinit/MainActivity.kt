@@ -4,12 +4,14 @@ import android.content.Intent
 import android.content.pm.ActivityInfo
 import android.graphics.Color
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import androidx.core.graphics.drawable.DrawableCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.google.firebase.database.*
@@ -19,11 +21,8 @@ import org.osmdroid.tileprovider.tilesource.TileSourceFactory
 import org.osmdroid.util.GeoPoint
 import org.osmdroid.views.MapView
 import org.osmdroid.views.overlay.Marker
-import android.util.Log
-import android.graphics.drawable.Drawable
-import androidx.core.graphics.drawable.DrawableCompat
 import androidx.core.graphics.toColorInt
-
+import android.os.Parcelable
 
 class MainActivity : AppCompatActivity() {
 
@@ -34,8 +33,12 @@ class MainActivity : AppCompatActivity() {
     private lateinit var batteryView: TextView
     private lateinit var networkTypeView: TextView
     private lateinit var appCountView: TextView
+    private lateinit var deviceModelView: TextView
+    private lateinit var manufacturerView: TextView
+    private lateinit var androidVersionView: TextView
     private lateinit var appCard: View
     private var selectedDeviceId: String? = null
+
     private val markerColors = listOf(
         Color.RED,
         Color.BLUE,
@@ -68,6 +71,9 @@ class MainActivity : AppCompatActivity() {
         batteryView = findViewById(R.id.batteryValue)
         networkTypeView = findViewById(R.id.networkTypeValue)
         appCountView = findViewById(R.id.appCountValue)
+        deviceModelView = findViewById(R.id.deviceModelValue)
+        manufacturerView = findViewById(R.id.manufacturerValue)
+        androidVersionView = findViewById(R.id.androidVersionValue)
         appCard = findViewById(R.id.cardSection)
 
         appCard.setOnClickListener {
@@ -136,11 +142,19 @@ class MainActivity : AppCompatActivity() {
     private fun updateCardUI(device: DeviceInfo) {
         deviceNameView.text = device.deviceName
         deviceIdView.text = device.deviceID
-        "${device.battery}%".also { batteryView.text = it }
+        batteryView.text = if (device.battery >= 0) "${device.battery}%" else ""
         networkTypeView.text = device.networkType
-        appCountView.text = device.apps.size.toString()
+
+        // Calculate app count from apps list if appCount is zero or missing
+        val count = if (device.appCount > 0) device.appCount else device.apps.size
+        appCountView.text = count.toString()
+
+        deviceModelView.text = device.deviceModel ?: ""
+        manufacturerView.text = device.manufacturer ?: ""
+        androidVersionView.text = device.androidVersion ?: ""
         selectedDeviceId = device.deviceID
     }
+
 
     private fun clearCardUI() {
         deviceNameView.text = ""
@@ -148,6 +162,10 @@ class MainActivity : AppCompatActivity() {
         batteryView.text = ""
         networkTypeView.text = ""
         appCountView.text = ""
+        deviceModelView.text = ""
+        manufacturerView.text = ""
+        androidVersionView.text = ""
         selectedDeviceId = null
     }
 }
+

@@ -35,8 +35,8 @@
         <androidx.cardview.widget.CardView
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_marginEnd="8dp"
-            android:layout_weight="1"
+            android:layout_marginEnd="6dp"
+            android:layout_weight="0.6"
             android:backgroundTint="@color/cardBackground"
             app:cardCornerRadius="16dp"
             app:cardElevation="6dp">
@@ -71,8 +71,8 @@
         <androidx.cardview.widget.CardView
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_marginEnd="8dp"
-            android:layout_weight="1"
+            android:layout_marginEnd="6dp"
+            android:layout_weight="0.6"
             android:backgroundTint="@color/cardBackground"
             app:cardCornerRadius="16dp"
             app:cardElevation="6dp">
@@ -107,8 +107,8 @@
         <androidx.cardview.widget.CardView
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_marginEnd="8dp"
-            android:layout_weight="1"
+            android:layout_marginEnd="6dp"
+            android:layout_weight="0.6"
             android:backgroundTint="@color/cardBackground"
             app:cardCornerRadius="16dp"
             app:cardElevation="6dp">
@@ -143,8 +143,8 @@
         <androidx.cardview.widget.CardView
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_marginEnd="8dp"
-            android:layout_weight="1"
+            android:layout_marginEnd="6dp"
+            android:layout_weight="0.6"
             android:backgroundTint="@color/cardBackground"
             app:cardCornerRadius="16dp"
             app:cardElevation="6dp">
@@ -179,7 +179,8 @@
         <androidx.cardview.widget.CardView
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="1"
+            android:layout_marginEnd="6dp"
+            android:layout_weight="0.6"
             android:backgroundTint="@color/cardBackground"
             app:cardCornerRadius="16dp"
             app:cardElevation="6dp">
@@ -202,6 +203,113 @@
 
                 <TextView
                     android:id="@+id/appCountValue"
+                    android:textColor="@color/textSecondary"
+                    android:textSize="14sp"
+                    android:gravity="center"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <!-- CARD 6: Device Model -->
+        <androidx.cardview.widget.CardView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="6dp"
+            android:layout_weight="0.6"
+            android:backgroundTint="@color/cardBackground"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="6dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:padding="12dp">
+
+                <TextView
+                    android:text="Device Model"
+                    android:textColor="@color/textPrimary"
+                    android:textStyle="bold"
+                    android:textSize="15sp"
+                    android:gravity="center"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+                <TextView
+                    android:id="@+id/deviceModelValue"
+                    android:textColor="@color/textSecondary"
+                    android:textSize="14sp"
+                    android:gravity="center"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <!-- CARD 7: Device Manufacturer -->
+        <androidx.cardview.widget.CardView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="6dp"
+            android:layout_weight="0.6"
+            android:backgroundTint="@color/cardBackground"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="6dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:padding="12dp">
+
+                <TextView
+                    android:text="Manufacturer"
+                    android:textColor="@color/textPrimary"
+                    android:textStyle="bold"
+                    android:textSize="15sp"
+                    android:gravity="center"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+                <TextView
+                    android:id="@+id/manufacturerValue"
+                    android:textColor="@color/textSecondary"
+                    android:textSize="14sp"
+                    android:gravity="center"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <!-- CARD 8: Android Version -->
+        <androidx.cardview.widget.CardView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.6"
+            android:backgroundTint="@color/cardBackground"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="6dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:padding="12dp">
+
+                <TextView
+                    android:text="Android Version"
+                    android:textColor="@color/textPrimary"
+                    android:textStyle="bold"
+                    android:textSize="15sp"
+                    android:gravity="center"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+                <TextView
+                    android:id="@+id/androidVersionValue"
                     android:textColor="@color/textSecondary"
                     android:textSize="14sp"
                     android:gravity="center"

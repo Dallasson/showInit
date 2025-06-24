@@ -3,8 +3,10 @@ package com.init.showinit
 
 import android.os.Bundle
 import android.util.Log
+import android.widget.GridView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.database.*
@@ -19,7 +21,7 @@ class AppListActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         recyclerView = RecyclerView(this).apply {
-            layoutManager = LinearLayoutManager(this@AppListActivity)
+            layoutManager = GridLayoutManager(this@AppListActivity,4)
         }
         setContentView(recyclerView)
 

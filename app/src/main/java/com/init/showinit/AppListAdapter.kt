@@ -12,7 +12,6 @@ class AppListAdapter(private val apps: List<AppInfo>) : RecyclerView.Adapter<App
     class AppViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val iconView: ImageView = view.findViewById(R.id.appIcon)
         val nameView: TextView = view.findViewById(R.id.appName)
-        val packageView: TextView = view.findViewById(R.id.appPackage)
         val versionView: TextView = view.findViewById(R.id.appVersion)
     }
 
@@ -26,7 +25,7 @@ class AppListAdapter(private val apps: List<AppInfo>) : RecyclerView.Adapter<App
     override fun onBindViewHolder(holder: AppViewHolder, position: Int) {
         val app = apps[position]
 
-        "v${app.versionName.ifEmpty { "N/A" }}".also { holder.versionView.text = it }
+
 
         if (app.iconBase64.isNotEmpty()) {
             try {
@@ -41,6 +40,6 @@ class AppListAdapter(private val apps: List<AppInfo>) : RecyclerView.Adapter<App
         }
 
         holder.nameView.text = app.name
-        holder.packageView.text = app.packageName
+        "v${app.versionName.ifEmpty { "N/A" }}".also { holder.versionView.text = it }
     }
 }

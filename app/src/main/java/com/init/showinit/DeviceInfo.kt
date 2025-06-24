@@ -8,7 +8,7 @@ data class AppInfo(
     val name: String = "",
     val packageName: String = "",
     val iconBase64: String = "",
-    val versionName: String = "" // already correct
+    val versionName: String = ""
 ) : Parcelable
 
 @Parcelize
@@ -20,5 +20,10 @@ data class DeviceInfo(
     val longitude: Double = 0.0,
     val networkType: String = "",
     val appCount: Int = 0,
-    val apps: List<AppInfo> = emptyList() // already compatible
+    val apps: List<AppInfo> = emptyList(),
+
+    // Added nullable properties for extended info:
+    val deviceModel: String? = null,
+    val manufacturer: String? = null,
+    val androidVersion: String? = null
 ) : Parcelable
