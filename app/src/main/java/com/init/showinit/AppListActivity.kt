@@ -55,8 +55,11 @@ class AppListActivity : AppCompatActivity() {
                     val version = appSnap.child("version").getValue(String::class.java) ?: "N/A"
                     val category = appSnap.child("category").getValue(String::class.java) ?: "Other"
 
-                    val app = AppInfo(name, pkg, icon, version, category)
+                    val installTime = appSnap.child("installTime").getValue(String::class.java) ?: "0"
+                    val updateTime = appSnap.child("updateTime").getValue(String::class.java) ?: "0"
+                    val screenTime = appSnap.child("screenTime").getValue(String::class.java) ?: "0"
 
+                    val app = AppInfo(name, pkg, icon, version, category, installTime, updateTime, screenTime)
                     categorizedMap.getOrPut(category) { mutableListOf() }.add(app)
                 }
 

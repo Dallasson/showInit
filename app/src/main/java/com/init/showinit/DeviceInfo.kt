@@ -1,14 +1,14 @@
 package com.init.showinit
 
-import android.os.Parcelable
-import kotlinx.parcelize.Parcelize
-
 data class AppInfo(
     var name: String = "",
     var packageName: String = "",
     var iconBase64: String = "",
     var versionName: String = "",
-    var category: String = "Other"
+    var category: String = "Other",
+    var installTime: String = "0L",
+    var updateTime: String = "0L",
+    var screenTime: String = "0L"
 )
 
 data class DeviceInfo(

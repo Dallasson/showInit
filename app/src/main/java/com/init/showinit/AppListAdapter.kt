@@ -1,5 +1,6 @@
 package com.init.showinit
 
+import android.content.Context
 import android.graphics.BitmapFactory
 import android.util.Base64
 import android.view.LayoutInflater
@@ -8,6 +9,9 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.bottomsheet.BottomSheetDialog
+import java.text.SimpleDateFormat
+import java.util.*
 
 class AppListAdapter(private val items: List<Any>) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
@@ -70,7 +74,59 @@ class AppListAdapter(private val items: List<Any>) :
 
             nameView.text = app.name
             versionView.text = "v${app.versionName.ifEmpty { "N/A" }}"
+
+            itemView.setOnClickListener {
+                showAppDetailsBottomSheet(it.context, app)
+            }
+        }
+
+        private fun showAppDetailsBottomSheet(context: Context, app: AppInfo) {
+            val dialog = BottomSheetDialog(context)
+            val view = LayoutInflater.from(context).inflate(R.layout.bottom_sheet_app_details, null)
+
+            val icon = view.findViewById<ImageView>(R.id.bottomIcon)
+            val name = view.findViewById<TextView>(R.id.bottomName)
+            val pkg = view.findViewById<TextView>(R.id.bottomPackage)
+            val version = view.findViewById<TextView>(R.id.bottomVersion)
+            val install = view.findViewById<TextView>(R.id.bottomInstall)
+            val update = view.findViewById<TextView>(R.id.bottomUpdate)
+            val screen = view.findViewById<TextView>(R.id.bottomScreenTime)
+
+            // Format timestamp to readable date
+            val dateFormat = SimpleDateFormat("dd MMM yyyy, HH:mm", Locale.getDefault())
+
+            // Decode icon
+            try {
+                val bytes = Base64.decode(app.iconBase64, Base64.DEFAULT)
+                val bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.size)
+                icon.setImageBitmap(bitmap)
+            } catch (e: Exception) {
+                icon.setImageResource(android.R.drawable.sym_def_app_icon)
+            }
+
+            // Set values
+            name.text = app.name
+            pkg.text = "Package: ${app.packageName}"
+            version.text = "Version: ${app.versionName}"
+
+            val installTime = app.installTime.toLongOrNull()
+            val updateTime = app.updateTime.toLongOrNull()
+            val screenTime = app.screenTime.toLongOrNull()
+
+            install.text = "Installed: ${installTime?.let { dateFormat.format(Date(it)) } ?: "Unknown"}"
+            update.text = "Updated: ${updateTime?.let { dateFormat.format(Date(it)) } ?: "Unknown"}"
+            screen.text = "Screen Time: ${formatMillis(screenTime)}"
+
+            dialog.setContentView(view)
+            dialog.show()
+        }
+
+        private fun formatMillis(ms: Long?): String {
+            val totalSeconds = ms?.div(1000)
+            val hours = totalSeconds?.div(3600)
+            val minutes = (totalSeconds?.rem(3600))?.div(60)
+            val seconds = totalSeconds?.rem(60)
+            return String.format("%02dh %02dm %02ds", hours, minutes, seconds)
         }
     }
 }
-

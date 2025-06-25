@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/appBottomSheet"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="20dp"
+    android:orientation="vertical"
+    android:background="?android:attr/windowBackground">
+
+    <ImageView
+        android:id="@+id/bottomIcon"
+        android:layout_width="72dp"
+        android:layout_height="72dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="12dp"
+        android:contentDescription="App Icon"
+        android:scaleType="centerCrop"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:padding="4dp" />
+
+    <TextView
+        android:id="@+id/bottomName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:textSize="18sp"
+        android:textAlignment="center"
+        android:textColor="?android:attr/textColorPrimary" />
+
+    <TextView
+        android:id="@+id/bottomPackage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="14sp"
+        android:layout_marginTop="6dp"
+        android:textColor="?android:attr/textColorSecondary" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginVertical="10dp"
+        android:background="?android:attr/listDivider" />
+
+    <TextView
+        android:id="@+id/bottomVersion"
+        style="@style/BottomSheetDetailText" />
+
+    <TextView
+        android:id="@+id/bottomInstall"
+        style="@style/BottomSheetDetailText" />
+
+    <TextView
+        android:id="@+id/bottomUpdate"
+        style="@style/BottomSheetDetailText" />
+
+    <TextView
+        android:id="@+id/bottomScreenTime"
+        style="@style/BottomSheetDetailText" />
+</LinearLayout>
