@@ -3,15 +3,14 @@ package com.init.showinit
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
 
-@Parcelize
 data class AppInfo(
-    val name: String = "",
-    val packageName: String = "",
-    val iconBase64: String = "",
-    val versionName: String = ""
-) : Parcelable
+    var name: String = "",
+    var packageName: String = "",
+    var iconBase64: String = "",
+    var versionName: String = "",
+    var category: String = "Other"
+)
 
-@Parcelize
 data class DeviceInfo(
     val deviceID: String = "",
     val deviceName: String = "",
@@ -21,9 +20,7 @@ data class DeviceInfo(
     val networkType: String = "",
     val appCount: Int = 0,
     val apps: List<AppInfo> = emptyList(),
-
-    // Added nullable properties for extended info:
     val deviceModel: String? = null,
     val manufacturer: String? = null,
     val androidVersion: String? = null
-) : Parcelable
+)
