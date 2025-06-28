@@ -41,6 +41,11 @@ class AppListActivity : AppCompatActivity() {
             return
         }
 
+       getDeviceInfo(deviceID,layoutManager)
+    }
+
+    private fun getDeviceInfo(deviceID : String,layoutManager: GridLayoutManager){
+
         dbRef = FirebaseDatabase.getInstance().reference
             .child("Info").child(deviceID).child("apps")
 
@@ -85,5 +90,6 @@ class AppListActivity : AppCompatActivity() {
                 Log.e("AppListActivity", "Firebase error: ${error.message}")
             }
         })
+
     }
 }

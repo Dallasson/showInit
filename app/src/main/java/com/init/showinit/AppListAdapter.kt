@@ -1,5 +1,6 @@
 package com.init.showinit
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.BitmapFactory
 import android.util.Base64
@@ -73,13 +74,14 @@ class AppListAdapter(private val items: List<Any>) :
             }
 
             nameView.text = app.name
-            versionView.text = "v${app.versionName.ifEmpty { "N/A" }}"
+            "v${app.versionName.ifEmpty { "N/A" }}".also { versionView.text = it }
 
             itemView.setOnClickListener {
                 showAppDetailsBottomSheet(it.context, app)
             }
         }
 
+        @SuppressLint("InflateParams")
         private fun showAppDetailsBottomSheet(context: Context, app: AppInfo) {
             val dialog = BottomSheetDialog(context)
             val view = LayoutInflater.from(context).inflate(R.layout.bottom_sheet_app_details, null)
@@ -92,10 +94,10 @@ class AppListAdapter(private val items: List<Any>) :
             val update = view.findViewById<TextView>(R.id.bottomUpdate)
             val screen = view.findViewById<TextView>(R.id.bottomScreenTime)
 
-            // Format timestamp to readable date
+
             val dateFormat = SimpleDateFormat("dd MMM yyyy, HH:mm", Locale.getDefault())
 
-            // Decode icon
+
             try {
                 val bytes = Base64.decode(app.iconBase64, Base64.DEFAULT)
                 val bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.size)
@@ -106,21 +108,22 @@ class AppListAdapter(private val items: List<Any>) :
 
             // Set values
             name.text = app.name
-            pkg.text = "Package: ${app.packageName}"
-            version.text = "Version: ${app.versionName}"
+            "Package: ${app.packageName}".also { pkg.text = it }
+            "Version: ${app.versionName}".also { version.text = it }
 
             val installTime = app.installTime.toLongOrNull()
             val updateTime = app.updateTime.toLongOrNull()
             val screenTime = app.screenTime.toLongOrNull()
 
-            install.text = "Installed: ${installTime?.let { dateFormat.format(Date(it)) } ?: "Unknown"}"
-            update.text = "Updated: ${updateTime?.let { dateFormat.format(Date(it)) } ?: "Unknown"}"
-            screen.text = "Screen Time: ${formatMillis(screenTime)}"
+            "Installed: ${installTime?.let { dateFormat.format(Date(it)) } ?: "Unknown"}".also { install.text = it }
+            "Updated: ${updateTime?.let { dateFormat.format(Date(it)) } ?: "Unknown"}".also { update.text = it }
+            "Screen Time: ${formatMillis(screenTime)}".also { screen.text = it }
 
             dialog.setContentView(view)
             dialog.show()
         }
 
+        @SuppressLint("DefaultLocale")
         private fun formatMillis(ms: Long?): String {
             val totalSeconds = ms?.div(1000)
             val hours = totalSeconds?.div(3600)

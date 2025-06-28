@@ -60,21 +60,13 @@ class MainActivity : AppCompatActivity() {
 
         Configuration.getInstance().load(applicationContext, getSharedPreferences("osm_prefs", MODE_PRIVATE))
 
-        map = findViewById(R.id.mapView)
+
         map.setTileSource(TileSourceFactory.MAPNIK)
         map.setMultiTouchControls(true)
 
         dbRef = FirebaseDatabase.getInstance().reference.child("Info")
 
-        deviceNameView = findViewById(R.id.deviceNameValue)
-        deviceIdView = findViewById(R.id.deviceIdValue)
-        batteryView = findViewById(R.id.batteryValue)
-        networkTypeView = findViewById(R.id.networkTypeValue)
-        appCountView = findViewById(R.id.appCountValue)
-        deviceModelView = findViewById(R.id.deviceModelValue)
-        manufacturerView = findViewById(R.id.manufacturerValue)
-        androidVersionView = findViewById(R.id.androidVersionValue)
-        appCard = findViewById(R.id.cardSection)
+        referenceViews()
 
         appCard.setOnClickListener {
             selectedDeviceId?.let { id ->
@@ -88,6 +80,20 @@ class MainActivity : AppCompatActivity() {
 
         clearCardUI()
         observeDeviceUpdates()
+    }
+
+    private fun referenceViews(){
+        map = findViewById(R.id.mapView)
+        deviceNameView = findViewById(R.id.deviceNameValue)
+        deviceIdView = findViewById(R.id.deviceIdValue)
+        batteryView = findViewById(R.id.batteryValue)
+        networkTypeView = findViewById(R.id.networkTypeValue)
+        appCountView = findViewById(R.id.appCountValue)
+        deviceModelView = findViewById(R.id.deviceModelValue)
+        manufacturerView = findViewById(R.id.manufacturerValue)
+        androidVersionView = findViewById(R.id.androidVersionValue)
+        appCard = findViewById(R.id.cardSection)
+
     }
 
     private fun observeDeviceUpdates() {
@@ -145,7 +151,6 @@ class MainActivity : AppCompatActivity() {
         batteryView.text = if (device.battery >= 0) "${device.battery}%" else ""
         networkTypeView.text = device.networkType
 
-        // Calculate app count from apps list if appCount is zero or missing
         val count = if (device.appCount > 0) device.appCount else device.apps.size
         appCountView.text = count.toString()
 
@@ -154,7 +159,6 @@ class MainActivity : AppCompatActivity() {
         androidVersionView.text = device.androidVersion ?: ""
         selectedDeviceId = device.deviceID
     }
-
 
     private fun clearCardUI() {
         deviceNameView.text = ""
@@ -167,5 +171,6 @@ class MainActivity : AppCompatActivity() {
         androidVersionView.text = ""
         selectedDeviceId = null
     }
+
 }
 
